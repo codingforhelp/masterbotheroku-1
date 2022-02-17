@@ -121,17 +121,14 @@ def play_game(li, game_id, engine_factory, user_profile, config):
     #Initial response of stream will be the full game info. Store it
     initial_state = json.loads(next(lines).decode('utf-8'))
     game = model.Game(initial_state, user_profile["username"], li.baseUrl, config.get("abort_time", 20))
-    timelim=game.state["btime"]/800
-    timelim=timelim/20
-    if timelim>=0.3 and timelim<=2:
-        bullet=True
-    time=round(timelim/150*30,2)
-    if time>9:
-        time=3
-    elif time<0.2:
-        time=0.1
-    if bullet:
-        time=0.2
+   timelim=game.state["btime"]/1000
+    timelim=timelim/60
+    timep=round(timelim/85*60,1)
+    if timep>10:
+        timep=10
+    elif timep<0.3:
+        timep=0.3
+        
     board = setup_board(game)
     cfg = config["engine"]
 
