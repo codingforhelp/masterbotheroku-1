@@ -123,15 +123,11 @@ def play_game(li, game_id, engine_factory, user_profile, config):
     game = model.Game(initial_state, user_profile["username"], li.baseUrl, config.get("abort_time", 20))
     timelim=game.state["btime"]/1000
     timelim=timelim/60
-    if timelim>=0.5 and timelim<=2:
-        bullet=True
-    time=round(timelim/150*60,1)
-    if time>6:
-        time=6
-    elif time<0.3:
-        time=0.3
-    if bullet:
-        time=0.2
+    timep=round(timelim/85*60,1)
+    if timep>10:
+        timep=10
+    elif timep<0.3:
+        timep=0.3
     board = setup_board(game)
     cfg = config["engine"]
 
